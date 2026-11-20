@@ -11,6 +11,7 @@ The application is written with Dart and Flutter. It supports Windows and web bu
 - Shows forecasted demand and maximum predicted temperature.
 - Displays active alert counts and critical-alert counts.
 - Filters a consumption chart by neighborhood.
+- Compares a neighborhood's six-month consumption history with the regional average.
 - Compares each neighborhood's forecasted peak with its available capacity.
 - Separates the dashboard into Panel, Alertas, Decisoes, and Ajustes navigation tabs.
 - Opens an alert-detail view when a neighborhood ranking is selected.
@@ -36,7 +37,7 @@ The user interface is built from Flutter widgets rather than embedded HTML or Re
 - `lib/theme/`: shared colors and typography.
 - `lib/features/`: feature-specific screens and navigation.
 
-The neighborhood chip selection is kept with `StatefulWidget` state. The dashboard is rebuilt immediately when the selection changes. Ranking rows calculate their visual color and bar width from their capacity percentage. The consumption chart is drawn with `CustomPainter` and grid lines.
+The neighborhood chip selection is kept with `StatefulWidget` state. The dashboard is rebuilt immediately when the selection changes. The same selection supplies synthetic historical values to `HistoricalComparisonChart`, which compares the neighborhood with the regional average across six months. Ranking rows calculate their visual color and bar width from their capacity percentage. Charts are drawn with `CustomPainter` and grid lines.
 
 ## Project structure
 
@@ -52,6 +53,8 @@ lib/
     kpi_tile.dart                   Reusable KPI indicator
     page_header.dart                Shared screen header
     ranking_row.dart                Capacity-ranking row
+    historical_comparison_chart.dart
+                                   Neighborhood-versus-regional chart
   features/
     dashboard/
       dashboard_page.dart           Bottom navigation container

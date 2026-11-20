@@ -5,6 +5,7 @@ import '../../widgets/app_card.dart';
 import '../../widgets/kpi_tile.dart';
 import '../../widgets/page_header.dart';
 import '../../widgets/ranking_row.dart';
+import '../../widgets/historical_comparison_chart.dart';
 import '../alert_detail/alert_detail_page.dart';
 
 class EnergyDashboardPage extends StatefulWidget {
@@ -23,6 +24,17 @@ class _EnergyDashboardPageState extends State<EnergyDashboardPage> {
     'Norte',
     'Sul',
   ];
+
+  final Map<String, List<double>> historicalNeighborhoodValues =
+      const {
+        'Todos': [1180, 1210, 1195, 1260, 1248, 1290],
+        'Centro': [420, 438, 431, 455, 448, 470],
+        'Norte': [360, 352, 365, 378, 390, 396],
+        'Sul': [400, 420, 399, 427, 410, 424],
+      };
+
+  static const List<double> regionalHistoricalValues =
+      [1120, 1145, 1138, 1180, 1168, 1210];
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +157,16 @@ class _EnergyDashboardPageState extends State<EnergyDashboardPage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  AppCard(
+                    child: HistoricalComparisonChart(
+                      neighborhoodName: selectedNeighborhood,
+                      neighborhoodValues:
+                          historicalNeighborhoodValues[selectedNeighborhood] ??
+                              historicalNeighborhoodValues['Todos']!,
+                      regionalValues: regionalHistoricalValues,
                     ),
                   ),
                   const SizedBox(height: 16),
